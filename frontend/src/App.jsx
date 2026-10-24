@@ -9,10 +9,13 @@ import Admissions from './pages/Admissions'
 import Principal from './pages/Principal'
 import Contact from './pages/Contact'
 import StudentLife from './pages/StudentLife'
+import Admin from './pages/Admin'
 
 function ScrollTop() {
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
   return null
 }
 function BackToTop() {
@@ -28,6 +31,7 @@ export default function App() {
     <ScrollTop /><Navbar />
     <main>
       <Routes>
+        <Route path="/admin" element={<Admin />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />

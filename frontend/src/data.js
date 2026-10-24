@@ -1,12 +1,15 @@
-export const links = [['/', 'Home'], ['/about', 'About'], ['/gallery', 'Gallery'], ['/admissions', 'Admissions'], ['/principal', 'Principal'], ['/student-life', 'Student Life'], ['/contact', 'Contact']]
-export const highlights = [['👩‍🏫', 'Experienced Teachers', 'Caring, trained teachers for every class.'], ['🖥️', 'Smart Classrooms', 'Digital boards make lessons come alive.'], ['⚽', 'Sports', 'Daily games, yoga and annual sports day.'], ['📚', 'Library', 'Thousands of storybooks and magazines.'], ['💻', 'Computer Lab', 'Hands-on coding and typing for kids.']]
-export const stats = [['500+', 'Happy Students'], ['30', 'Teachers'], ['20', 'Classrooms'], ['45', 'Awards Won']]
-export const activities = [['🎨', 'Art Week', 'Students painted the school walls with colours.'], ['🔬', 'Science Fair', 'Class 4 showed volcanoes and solar models.'], ['🌳', 'Plantation Drive', 'Each child planted and named a sapling.']]
-export const testimonials = [['Anita Sharma', 'Parent of Class 3', 'My daughter loves going to school every single day!'], ['Rohan Das', 'Parent of Class 5', 'Teachers are kind and the activities are wonderful.'], ['Meera Singh', 'Parent of Class 1', 'A safe, happy place where children truly bloom.']]
-export const notices = [['Oct 10', 'Parent-Teacher meeting for Classes 1-5'], ['Oct 15', 'Annual Sports Day practice begins'], ['Oct 24', 'School closed for Diwali holidays'], ['Nov 05', 'Winter uniform mandatory from today']]
-export const events = [['12', 'OCT', 'Art & Craft Exhibition', 'School Hall'], ['20', 'OCT', 'Science Quiz', 'Room 4'], ['14', 'NOV', "Children's Day Carnival", 'Playground']]
-export const faqs = [['Which classes are available?', 'We teach Class 1 to Class 5.'], ['What is the school timing?', 'Monday to Saturday, 8:00 AM to 2:00 PM.'], ['How do I apply?', 'Fill the admission enquiry form and visit with your documents.'], ['Is transport available?', 'Yes, school buses cover major nearby areas.']]
+export const links = [['/', 'Home'], ['/about', 'About'], ['/gallery', 'Gallery'], ['/admissions', 'Admissions'], ['/principal', 'Principal'], ['/student-life', 'Student Life']]
+export const faqs = [
+  ['Which classes are available?', 'Alice Public School teaches Nursery through Class V.'],
+  ['How do I apply?', 'Visit the school, submit proof of age and address, and bring previous school records if available.'],
+  ['Where is the school?', '155E, Khajoor Rd, Block C, Molarband Extension, Badarpur, New Delhi, Delhi 110044.'],
+  ['How can I contact the school?', 'Call +91 98991 37983 or send an enquiry through the Admissions page.'],
+]
+export const clubs = [
+  ['📚', 'Core academics', 'Language, mathematics, and environmental studies with regular assessment.', 'c1'],
+  ['⚽', 'Sports & play', 'Physical activity and friendly games through the year.', 'c2'],
+  ['🎨', 'Art & craft', 'Creative sessions that give students a break from the textbook.', 'c3'],
+  ['🎉', 'Annual events', 'Assemblies, exhibitions, and celebrations that bring the school together.', 'c4'],
+]
 export const cats = ['All', 'School Events', 'Sports', 'Classrooms', 'Cultural Activities', 'Trips']
 export const photos = Array.from({ length: 15 }, (_, i) => ({ id: i, cat: cats[(i % 5) + 1], src: `/images/photo${i + 1}.svg` }))
-export const clubs = [['🎵', 'Music', 'Songs, tabla and keyboard classes.', 'c1'], ['🖌️', 'Art', 'Drawing, craft and clay modelling.', 'c2'], ['💃', 'Dance', 'Folk and freestyle every Friday.', 'c3'], ['🔬', 'Science Club', 'Fun experiments and projects.', 'c4'], ['⚽', 'Sports', 'Football, cricket, kho-kho and more.', 'c5'], ['🚌', 'School Trips', 'Zoo, museum and nature visits.', 'c6'], ['🎉', 'Events & Festivals', 'Diwali, Holi, Annual Day and more.', 'c1'], ['🎭', 'Drama Club', 'Stories, plays and puppet shows.', 'c2']]
-export const quote = ['"The beautiful thing about learning is that no one can take it away from you."', 'B.B. King']
