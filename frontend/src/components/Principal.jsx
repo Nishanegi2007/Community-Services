@@ -1,3 +1,0 @@
-export default function Principal({ full = false }) {
-  return <div className="card prin"><div className="principal-avatar" aria-hidden="true">AR</div><div><h3>Anju Rajput</h3><small>Principal, Alice Public School</small><p>“Every child who walks into Alice Public School arrives curious, and it is our job to keep that curiosity alive.”</p>{full && <><p>From Nursery through Class V, the school focuses on reading, numbers, kindness, and confidence so that each student is ready for what comes next.</p><p>Our doors are always open to parents. Visit the school and see the classrooms for yourself.</p></>}</div></div>
-}
