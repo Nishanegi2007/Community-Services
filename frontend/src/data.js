@@ -1,4 +1,4 @@
-export const links = [['/', 'Home'], ['/about', 'About'], ['/gallery', 'Gallery'], ['/admissions', 'Admissions'], ['/principal', 'Principal'], ['/student-life', 'Student Life']]
+export const links = [['/', 'Home'], ['/#about', 'About'], ['/gallery', 'Gallery'], ['/admissions', 'Admissions'], ['/#student-life', 'Student Life']]
 export const faqs = [
   ['Which classes are available?', 'Alice Public School teaches Nursery through Class V.'],
   ['How do I apply?', 'Visit the school, submit proof of age and address, and bring previous school records if available.'],

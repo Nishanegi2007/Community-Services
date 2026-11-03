@@ -12,21 +12,30 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 import Home from './pages/Home'
-import About from './pages/About'
 import Gallery from './pages/Gallery'
 import Admissions from './pages/Admissions'
 import Principal from './pages/Principal'
 import Contact from './pages/Contact'
-import StudentLife from './pages/StudentLife'
 import Admin from './pages/Admin'
 
 function ScrollTop() {
+<<<<<<< HEAD
   const { pathname } = useLocation()
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
 
+=======
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' }))
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname, hash])
+>>>>>>> acd5c80 (Adding admin feature)
   return null
 }
 
@@ -62,6 +71,7 @@ function BackToTop() {
 }
 
 export default function App() {
+<<<<<<< HEAD
   const [isAdmin, setIsAdmin] = useState(false)
   const [sessionChecked, setSessionChecked] = useState(false)
 
@@ -194,3 +204,23 @@ export default function App() {
     </>
   )
 }
+=======
+  return (<>
+    <ScrollTop /><Navbar />
+    <main>
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<Navigate to="/#about" replace />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/admissions" element={<Admissions />} />
+        <Route path="/principal" element={<Principal />} />
+        <Route path="/student-life" element={<Navigate to="/#student-life" replace />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </main>
+    <Footer /><BackToTop />
+  </>)
+}
+>>>>>>> acd5c80 (Adding admin feature)

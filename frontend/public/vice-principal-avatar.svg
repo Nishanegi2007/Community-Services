@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
+  <title id="title">Illustrated Vice Principal avatar</title>
+  <circle cx="120" cy="120" r="120" fill="#f6c6d6"/>
+  <circle cx="120" cy="91" r="43" fill="#c98168"/>
+  <path d="M43 222c7-48 37-75 77-75s70 27 77 75" fill="#6b2d5c"/>
+  <path d="M76 84c0-35 19-57 47-57 31 0 47 23 43 61-11-13-28-20-48-20-16 0-30 5-42 16z" fill="#3d1c2e"/>
+  <circle cx="105" cy="94" r="3.5" fill="#3d1c2e"/>
+  <circle cx="136" cy="94" r="3.5" fill="#3d1c2e"/>
+  <path d="M108 113c7 6 17 6 24 0" fill="none" stroke="#7c3f37" stroke-linecap="round" stroke-width="3"/>
+  <path d="M83 177c10 10 22 15 37 15s27-5 37-15l20 45H63z" fill="#ffb140"/>
+</svg>
