@@ -129,11 +129,7 @@ export default function Admin() {
     )
 
     fields.published = form.elements.published.checked
-<<<<<<< HEAD
-
-=======
     fields.expiresAt = fields.expiresAt ? new Date(fields.expiresAt).toISOString() : null
->>>>>>> acd5c80 (Adding admin feature)
     try {
       await api('/announcements/admin', {
         method: 'POST',
@@ -236,8 +232,6 @@ export default function Admin() {
     event.preventDefault()
     setBusy(true)
     setNotice('')
-<<<<<<< HEAD
-
     const form = event.currentTarget
     const formData = new FormData(form)
 
@@ -246,13 +240,6 @@ export default function Admin() {
         method: 'POST',
         body: formData
       })
-
-=======
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    try {
-      await api('/gallery/admin', { method: 'POST', body: formData })
->>>>>>> acd5c80 (Adding admin feature)
       form.reset()
       await loadDashboard()
 
@@ -383,7 +370,6 @@ export default function Admin() {
   return (
     <section className="sec wrap admin-dashboard">
 
-<<<<<<< HEAD
       <div className="admin-heading">
         <div>
           <h1>Admin dashboard</h1>
@@ -391,25 +377,6 @@ export default function Admin() {
             Signed in as {user.name} · {user.email}
           </p>
         </div>
-=======
-      {tab === 'Announcements' && <div className="admin-section">
-        <form className="card form" onSubmit={createAnnouncement}>
-          <h2>Post an announcement</h2>
-          <label>Title<input name="title" required maxLength="120" /></label>
-          <label>Message<textarea name="message" required maxLength="3000" rows="4" /></label>
-          <label>Hide after (optional)<input name="expiresAt" type="datetime-local" /></label>
-          <label className="check-label"><input name="published" type="checkbox" defaultChecked value="true" /> Publish now</label>
-          <button className="btn" disabled={busy}>Publish announcement</button>
-        </form>
-        <div className="admin-list">{announcements.map((item) => <article className="card admin-item" key={item._id}>
-          <div><p className="admin-meta">{item.published ? 'Published' : 'Draft'} · {new Date(item.publishAt).toLocaleString()}{item.expiresAt && ` · ${new Date(item.expiresAt) <= new Date() ? 'Expired' : 'Ends'} ${new Date(item.expiresAt).toLocaleString()}`}</p><h3>{item.title}</h3><p>{item.message}</p>
-            <form className="admin-expiry-form" onSubmit={(event) => setAnnouncementExpiry(event, item)}><label>End date<input name="expiresAt" type="datetime-local" defaultValue={toLocalDateTime(item.expiresAt)} /></label><button className="chip" type="submit">Save date</button></form>
-          </div>
-          <div className="admin-actions"><button className="chip" onClick={() => editAnnouncement(item)}>Edit</button><button className="chip" onClick={() => toggleAnnouncement(item)}>{item.published ? 'Unpublish' : 'Publish'}</button><button className="chip danger" onClick={() => deleteAnnouncement(item)}>Delete</button></div>
-        </article>)}</div>
-      </div>}
->>>>>>> acd5c80 (Adding admin feature)
-
         <button
           className="btn alt"
           onClick={signOut}
@@ -469,6 +436,11 @@ export default function Admin() {
               />
             </label>
 
+            <label>
+              Hide after (optional)
+              <input name="expiresAt" type="datetime-local" />
+            </label>
+
             <label className="check-label">
               <input
                 name="published"
@@ -498,10 +470,15 @@ export default function Admin() {
                     {item.published ? 'Published' : 'Draft'}
                     {' · '}
                     {new Date(item.publishAt).toLocaleString()}
+                    {item.expiresAt && ` · ${new Date(item.expiresAt) <= new Date() ? 'Expired' : 'Ends'} ${new Date(item.expiresAt).toLocaleString()}`}
                   </p>
 
                   <h3>{item.title}</h3>
                   <p>{item.message}</p>
+                  <form className="admin-expiry-form" onSubmit={(event) => setAnnouncementExpiry(event, item)}>
+                    <label>End date<input name="expiresAt" type="datetime-local" defaultValue={toLocalDateTime(item.expiresAt)} /></label>
+                    <button className="chip" type="submit">Save date</button>
+                  </form>
                 </div>
 
                 <div className="admin-actions">
@@ -642,7 +619,7 @@ export default function Admin() {
                 <p>{inquiry.message}</p>
               </div>
 
-              <div className="admin-actions">
+              <div className="admin-actions inquiry-actions">
                 <label>
                   Status
                   <select
@@ -672,13 +649,6 @@ export default function Admin() {
         </div>
       )}
 
-<<<<<<< HEAD
-=======
-      {tab === 'Inquiries' && <div className="admin-list">{inquiries.length === 0 && <p>No enquiries yet.</p>}{inquiries.map((inquiry) => <article className="card admin-item" key={inquiry._id}>
-        <div><p className="admin-meta">{new Date(inquiry.createdAt).toLocaleString()} · {inquiry.subject}</p><h3>{inquiry.name}</h3><p><a href={`mailto:${inquiry.email}`}>{inquiry.email}</a>{inquiry.phone && <> · <a href={`tel:${inquiry.phone}`}>{inquiry.phone}</a></>}</p><p>{inquiry.message}</p></div>
-        <div className="admin-actions inquiry-actions"><label>Status<select value={inquiry.status} onChange={(event) => setInquiryStatus(inquiry, event.target.value)}><option value="new">New</option><option value="in-progress">In progress</option><option value="handled">Handled</option></select></label><button className="chip danger" onClick={() => deleteInquiry(inquiry)}>Delete</button></div>
-      </article>)}</div>}
->>>>>>> acd5c80 (Adding admin feature)
     </section>
   )
 }
