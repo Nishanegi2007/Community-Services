@@ -11,7 +11,6 @@ export default function Admissions() {
         through Class V. Tell us a little about your
         child and the school team will get back to you.
       </p>
-
       <div className="two">
 
         <div className="card">
@@ -23,13 +22,11 @@ export default function Admissions() {
             campus, meet the staff, and learn about
             the next steps.
           </p>
-
           <p>
             For your visit, bring proof of age,
             proof of address, and any previous
             school records.
           </p>
-
           <p>
             Call the school:
             {' '}

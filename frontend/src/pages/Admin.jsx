@@ -602,9 +602,7 @@ export default function Admin() {
                 <h3>{inquiry.name}</h3>
 
                 <p>
-                  <a href={`mailto:${inquiry.email}`}>
-                    {inquiry.email}
-                  </a>
+                  {inquiry.email ? <a href={`mailto:${inquiry.email}`}>{inquiry.email}</a> : 'No email provided'}
 
                   {inquiry.phone && (
                     <>
