@@ -12,6 +12,6 @@ export async function api(path, options = {}) {
     },
   });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.message || 'Request failed. Please try again.');
+  if (!response.ok) throw new Error(data.message || `Request failed (${response.status}). Please try again.`);
   return data;
 }

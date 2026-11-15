@@ -5,11 +5,12 @@ const authRoutes=require('./routes/auth.route');
 const announcementRoutes=require('./routes/announcement.route');
 const galleryRoutes=require('./routes/gallery.route');
 const inquiryRoutes=require('./routes/inquiry.route');
+const feeRoutes=require('./routes/fee.route');
 
 const app=express();
 app.disable('x-powered-by');
 app.use(helmet());
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '1mb' }));
 app.use(cookieParser());
 
 const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Credentials', 'true');
         res.setHeader('Vary', 'Origin');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
     }
     if (req.method === 'OPTIONS') return res.sendStatus(origin === frontendOrigin ? 204 : 403);
     next();
@@ -33,6 +34,7 @@ app.use('/api/auth',authRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/fees', feeRoutes);
 
 app.use((error, req, res, next) => {
     if (res.headersSent) return next(error);

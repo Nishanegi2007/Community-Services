@@ -1,8 +1,9 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { api } from '../lib/api'
+import FeesDashboard from '../components/FeesDashboard'
 
-const tabs = ['Announcements', 'Gallery', 'Inquiries']
+const tabs = ['Announcements', 'Gallery', 'Inquiries', 'Fees']
 
 function toLocalDateTime(value) {
   if (!value) return ''
@@ -407,6 +408,8 @@ export default function Admin() {
           {notice}
         </p>
       )}
+
+      {tab === 'Fees' && <FeesDashboard />}
 
       {tab === 'Announcements' && (
         <div className="admin-section">
