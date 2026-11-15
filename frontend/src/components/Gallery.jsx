@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 
-export default function Gallery() {
+export default function Gallery({ loop = true }) {
   const [photos, setPhotos] = useState([])
   const [category, setCategory] = useState('All')
   const [selected, setSelected] = useState(null)
@@ -20,15 +20,18 @@ export default function Gallery() {
 
   return <>
     <div className="chips">{categories.map((item) => <button key={item} className={item === category ? 'chip on' : 'chip'} onClick={() => setCategory(item)}>{item}</button>)}</div>
-    <div className="gallery-marquee" aria-label="School photo gallery">
-      <div className="gallery-loop-track">
+    <div className={loop ? 'gallery-marquee' : 'gallery-static-grid'} aria-label="School photo gallery">
+      {loop ? <div className="gallery-loop-track">
         {[0, 1].map((copy) => <div className="gallery-loop-group" key={copy} aria-hidden={copy === 1}>
           {loopPhotos.map((photo, index) => <button key={`${copy}-${index}-${photo._id}`} className="shot" tabIndex={copy === 1 ? -1 : undefined} onClick={() => setSelected(photo)}>
             <img src={photo.imageUrl} alt={photo.title || photo.category} loading="lazy" />
             <span>{photo.title || photo.category}</span>
           </button>)}
         </div>)}
-      </div>
+      </div> : visiblePhotos.map((photo) => <button key={photo._id} className="shot" onClick={() => setSelected(photo)}>
+        <img src={photo.imageUrl} alt={photo.title || photo.category} loading="lazy" />
+        <span>{photo.title || photo.category}</span>
+      </button>)}
     </div>
     {selected && <div className="lb" onClick={() => setSelected(null)}><img src={selected.imageUrl} alt={selected.title || selected.category} /><button aria-label="Close photo" onClick={() => setSelected(null)}>✕</button></div>}
   </>
