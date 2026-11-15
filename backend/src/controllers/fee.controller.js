@@ -334,33 +334,27 @@ async function listLedger(req, res) {
     }
     return true;
   });
-  const yearStart = Number(academicYear.slice(0, 4));
-  const months = Array.from({ length: 12 }, (_, index) => {
-    const date = new Date(Date.UTC(yearStart, 3 + index, 1));
-    return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`;
-  });
-  const recordsToEnsure = yearEnrollments.flatMap((enrollment) => months.flatMap((recordMonth) => {
-    const { start: monthStart, end: monthEnd } = periodDates(recordMonth);
-    if (enrollment.joinedAt > monthEnd || (enrollment.leftAt && enrollment.leftAt < monthStart)) return [];
-    return [{ enrollment, month: recordMonth }];
-  }));
   const matched = yearEnrollments.filter((enrollment) => !(enrollment.joinedAt > end || (enrollment.leftAt && enrollment.leftAt < start)));
-  if (recordsToEnsure.length) {
+  const enrollmentIds = matched.map(({ _id }) => _id);
+  const existingRecordCount = matched.length
+    ? await MonthlyFeeRecord.countDocuments({ enrollment: { $in: enrollmentIds }, month })
+    : 0;
+  if (matched.length && existingRecordCount < matched.length) {
     const legacyPayments = await FeePayment.aggregate([
-      { $match: { enrollment: { $in: yearEnrollments.map(({ _id }) => _id) }, month: { $in: months } } },
+      { $match: { enrollment: { $in: enrollmentIds }, month } },
       { $group: { _id: { enrollment: '$enrollment', month: '$month' }, total: { $sum: '$amount' } } },
     ]);
     const legacyPaidByEnrollmentMonth = new Map(legacyPayments.map(({ _id, total }) => [`${_id.enrollment}:${_id.month}`, total]));
-    await MonthlyFeeRecord.bulkWrite(recordsToEnsure.map(({ enrollment, month: recordMonth }) => ({
+    await MonthlyFeeRecord.bulkWrite(matched.map((enrollment) => ({
       updateOne: {
-        filter: { enrollment: enrollment._id, month: recordMonth },
+        filter: { enrollment: enrollment._id, month },
         update: { $setOnInsert: {
           student: enrollment.student._id,
           enrollment: enrollment._id,
           academicYear,
-          month: recordMonth,
+          month,
           amountDue: enrollment.monthlyFee,
-          status: (legacyPaidByEnrollmentMonth.get(`${enrollment._id}:${recordMonth}`) || 0) >= enrollment.monthlyFee ? 'paid' : 'unpaid',
+          status: (legacyPaidByEnrollmentMonth.get(`${enrollment._id}:${month}`) || 0) >= enrollment.monthlyFee ? 'paid' : 'unpaid',
           updatedBy: req.admin._id,
         } },
         upsert: true,
